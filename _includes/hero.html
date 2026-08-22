@@ -1,0 +1,32 @@
+<section class="hero-bloc">
+  <div class="contenu hero">
+    <img class="hero-photo"
+         src="{{ '/assets/img/theo-dhaussy-400.jpg' | relative_url }}"
+         srcset="{{ '/assets/img/theo-dhaussy-400.jpg' | relative_url }} 400w,
+                 {{ '/assets/img/theo-dhaussy-800.jpg' | relative_url }} 800w"
+         sizes="(min-width: 48rem) 200px, 140px"
+         width="400" height="400" loading="eager"
+         alt="Portrait de {{ site.auteur.nom }}">
+
+    <div class="hero-texte">
+      <h1>{{ site.auteur.nom }}</h1>
+      <p class="hero-metier">{{ site.tagline }} · Linux / Windows</p>
+      <p class="hero-accroche">
+        Je construis mes propres infrastructures pour apprendre et expérimenter, 
+        notamment un homelab Linux supervisé que je fais évoluer depuis 2024.
+      </p>
+      <p class="hero-lieu">{{ site.auteur.ville }} · {{ site.auteur.mobilite }}</p>
+
+      <div class="actions">
+        <a class="bouton" href="{{ site.auteur.cv | relative_url }}" download
+           data-umami-event="Telechargement CV" data-umami-event-depuis="hero">{% include icone.html nom="telechargement" %}{{ site.data.ui.cta_cv }}</a>
+        <a class="bouton bouton-secondaire" href="{{ site.auteur.github }}"
+           data-umami-event="Lien GitHub" data-umami-event-depuis="hero">{% include icone.html nom="github" %}{{ site.data.ui.cta_github }}</a>
+        <a class="bouton bouton-secondaire" href="{{ site.auteur.linkedin }}"
+           data-umami-event="Lien LinkedIn" data-umami-event-depuis="hero">{% include icone.html nom="linkedin" %}{{ site.data.ui.cta_linkedin }}</a>
+        <a class="bouton bouton-secondaire" href="mailto:{{ site.auteur.email }}"
+           data-umami-event="Contact e-mail" data-umami-event-depuis="hero">{% include icone.html nom="courriel" %}{{ site.data.ui.cta_email }}</a>
+      </div>
+    </div>
+  </div>
+</section>

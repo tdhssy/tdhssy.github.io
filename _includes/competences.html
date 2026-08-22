@@ -1,0 +1,32 @@
+{%- assign projets = site.pages | where: "type", "projet" -%}
+{%- assign index_stacks = "|" -%}
+{%- for p in projets -%}
+  {%- for t in p.stack -%}
+    {%- assign index_stacks = index_stacks | append: t | append: "|" -%}
+  {%- endfor -%}
+{%- endfor -%}
+{%- assign index_stacks = index_stacks | downcase -%}
+
+<section class="section" id="competences">
+  <div class="contenu">
+    <h2 class="titre-section">{{ site.data.ui.titre_competences }}</h2>
+
+    {%- for groupe in site.data.competences %}
+    <div class="competences-groupe">
+      <h3 class="competences-domaine">{{ groupe.domaine }}</h3>
+      <ul class="tags">
+        {%- for t in groupe.tags -%}
+          {%- assign cle = "|" | append: t | append: "|" | downcase -%}
+          {%- if index_stacks contains cle -%}
+            <li><a class="tag tag-lien" href="{{ '/#projets' | relative_url }}"
+                   data-umami-event="Filtre technologie" data-umami-event-techno="{{ t }}"
+                   data-tag="{{ t | downcase }}">{{ t }}</a></li>
+          {%- else -%}
+            <li class="tag">{{ t }}</li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </div>
+    {%- endfor %}
+  </div>
+</section>

@@ -1,0 +1,13 @@
+{%- for depot in include.page.depots -%}
+  <a class="bouton bouton-secondaire" href="{{ depot.url }}"
+     data-umami-event="Lien depot"
+     data-umami-event-projet="{{ include.page.titre }}"
+     data-umami-event-depot="{{ depot.nom | default: depot.url }}"
+     data-umami-event-depuis="{{ include.depuis }}">
+    {%- if depot.url contains "github.com" -%}
+    {% include icone.html nom="github" %}
+    {%- else -%}
+    {% include icone.html nom="lien-sortant" %}
+    {%- endif -%}
+    {{ depot.nom | default: site.data.ui.projet_depot }}</a>
+{%- endfor -%}

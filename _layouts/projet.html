@@ -1,0 +1,30 @@
+---
+layout: base
+---
+<article class="section">
+  <div class="contenu">
+
+    <header class="fiche-entete">
+      <h1>{{ page.titre }}</h1>
+      <p class="fiche-meta">{% include periode.html debut=page.debut fin=page.fin %}</p>
+      <ul class="tags">
+        {%- for t in page.stack -%}<li class="tag">{{ t }}</li>{%- endfor -%}
+      </ul>
+      {%- if page.depots %}
+      <p class="actions">{% include depots.html page=page depuis="en-tete" %}</p>
+      {%- endif %}
+    </header>
+
+    <div class="prose">
+      {{ content }}
+    </div>
+
+    <div class="fiche-retour">
+      <a href="{{ '/#projets' | relative_url }}">&larr; {{ site.data.ui.projet_retour }}</a>
+      {%- if page.depots %}
+      <span class="fiche-depots">{% include depots.html page=page depuis="pied" %}</span>
+      {%- endif %}
+    </div>
+
+  </div>
+</article>

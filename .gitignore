@@ -1,0 +1,7 @@
+_site/
+.jekyll-bundle/
+.jekyll-cache/
+.sass-cache/
+.superpowers/
+Thumbs.db
+.DS_Store

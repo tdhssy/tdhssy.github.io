@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="{{ site.lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  {% if page.titre_seo %}
+    {% assign titre_page = page.titre_seo %}
+  {% elsif page.titre %}
+    {% assign titre_page = page.titre | append: " · " | append: site.auteur.nom %}
+  {% else %}
+    {% assign titre_page = site.auteur.nom | append: " · " | append: site.tagline %}
+  {% endif %}
+  {% assign description_page = page.description | default: page.resume | default: site.description | strip_newlines | strip %}
+
+  <title>{{ titre_page }}</title>
+  <meta name="description" content="{{ description_page }}">
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  {%- if site.verification.google and site.verification.google != "" %}
+  <meta name="google-site-verification" content="{{ site.verification.google }}">
+  {%- endif %}
+
+  <meta property="og:type" content="profile">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:site_name" content="{{ site.auteur.nom }}">
+  <meta property="og:title" content="{{ titre_page }}">
+  <meta property="og:description" content="{{ description_page }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  <meta property="og:image" content="{{ '/assets/img/theo-dhaussy-800.jpg' | absolute_url }}">
+  <meta name="twitter:card" content="summary">
+
+  <link rel="icon" href="{{ '/assets/img/favicon.svg' | relative_url }}" type="image/svg+xml">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "{{ site.auteur.nom }}",
+    "jobTitle": "{{ site.tagline }}",
+    "email": "mailto:{{ site.auteur.email }}",
+    "url": "{{ '/' | absolute_url }}",
+    "image": "{{ '/assets/img/theo-dhaussy-800.jpg' | absolute_url }}",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Lorient",
+      "addressRegion": "Bretagne",
+      "addressCountry": "FR"
+    },
+    "alumniOf": {
+      "@type": "CollegeOrUniversity",
+      "name": "Université de Bretagne Sud"
+    },
+    "knowsAbout": ["Active Directory", "Linux", "Windows Server", "Docker", "Supervision", "Réseaux"],
+    "sameAs": [
+      "{{ site.auteur.github }}",
+      "{{ site.auteur.linkedin }}"
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="saut" href="#contenu">{{ site.data.ui.saut_contenu }}</a>
+
+  <header class="entete">
+    <a class="entete-nom" href="{{ '/' | relative_url }}">{{ site.auteur.nom }}</a>
+    <nav class="entete-nav" aria-label="Navigation principale">
+      <a href="{{ '/#competences' | relative_url }}">{{ site.data.ui.nav_competences }}</a>
+      <a href="{{ '/#projets' | relative_url }}">{{ site.data.ui.nav_projets }}</a>
+      <a href="{{ '/#contact' | relative_url }}">{{ site.data.ui.nav_contact }}</a>
+    </nav>
+  </header>
+
+  <main id="contenu">
+    {{ content }}
+  </main>
+
+  <footer class="pied">
+    <p>{{ site.auteur.nom }} · {{ site.tagline }}</p>
+    <p class="pied-mention">{{ site.data.ui.pied_mention }}</p>
+    {%- if site.audience.id and site.audience.id != "" %}
+    <p class="pied-mention">{{ site.data.ui.pied_audience }}</p>
+    {%- endif %}
+  </footer>
+
+  <script src="{{ '/assets/js/filtre.js' | relative_url }}" defer></script>
+  {%- if site.audience.id and site.audience.id != "" %}
+  
+  <script defer src="{{ site.audience.script }}"
+          data-website-id="{{ site.audience.id }}"
+          data-domains="{{ site.url | remove: 'https://' | remove: 'http://' }}"></script>
+  {%- endif %}
+</body>
+</html>

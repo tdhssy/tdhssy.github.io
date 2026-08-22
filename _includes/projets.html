@@ -1,0 +1,47 @@
+{%- assign projets = site.pages | where: "type", "projet" -%}
+
+{%- assign index_metier = "|" -%}
+{%- for groupe in site.data.competences -%}
+  {%- if groupe.metier -%}
+    {%- for t in groupe.tags -%}
+      {%- assign index_metier = index_metier | append: t | append: "|" -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign index_metier = index_metier | downcase -%}
+
+{%- capture nl %}
+{% endcapture -%}
+
+{%- assign cles_brutes = "" -%}
+{%- for p in projets -%}
+  {%- assign score = 0 -%}
+  {%- for t in p.stack -%}
+    {%- assign cle_tag = "|" | append: t | append: "|" | downcase -%}
+    {%- if index_metier contains cle_tag -%}
+      {%- assign score = score | plus: 1 -%}
+    {%- endif -%}
+  {%- endfor -%}
+  {%- assign score_pad = "0000000000" | append: score | slice: -10, 10 -%}
+  {%- assign cle = score_pad | append: "|" | append: p.debut | append: "|" | append: p.url -%}
+  {%- assign cles_brutes = cles_brutes | append: cle | append: nl -%}
+{%- endfor -%}
+
+{%- assign cles_triees = cles_brutes | split: nl | sort | reverse -%}
+
+<section class="section section-doux" id="projets">
+  <div class="contenu">
+    <h2 class="titre-section">{{ site.data.ui.titre_projets }}</h2>
+    <div class="cartes" id="liste-projets" data-libelle-tout="{{ site.data.ui.filtre_tout }}" data-resultat-pluriel="{{ site.data.ui.filtre_resultat_pluriel }}" data-resultat-singulier="{{ site.data.ui.filtre_resultat_singulier }}">
+      {%- for cle in cles_triees -%}
+        {%- assign identifiant = cle | split: "|" | last -%}
+        {%- for p in projets -%}
+          {%- if p.url == identifiant -%}
+            {% include carte-projet.html projet=p %}
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>

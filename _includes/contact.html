@@ -1,0 +1,24 @@
+<section class="section section-doux" id="contact">
+  <div class="contenu prose">
+    <h2 class="titre-section">{{ site.data.ui.titre_contact }}</h2>
+
+    <p>
+      Je suis à la recherche d'un poste d'administrateur systèmes et réseaux.
+      {{ site.auteur.ville }} · {{ site.auteur.mobilite }}.
+    </p>
+
+    <ul class="contact-liens">
+      <li><a href="mailto:{{ site.auteur.email }}"
+         data-umami-event="Contact e-mail" data-umami-event-depuis="contact">{% include icone.html nom="courriel" %}{{ site.auteur.email }}</a></li>
+      <li><a href="{{ site.auteur.github }}"
+         data-umami-event="Lien GitHub" data-umami-event-depuis="contact">{% include icone.html nom="github" %}{{ site.auteur.github | remove: "https://" }}</a></li>
+      <li><a href="{{ site.auteur.linkedin }}"
+         data-umami-event="Lien LinkedIn" data-umami-event-depuis="contact">{% include icone.html nom="linkedin" %}{{ site.auteur.linkedin | remove: "https://www." }}</a></li>
+    </ul>
+
+    <p>
+      <a class="bouton" href="{{ site.auteur.cv | relative_url }}" download
+         data-umami-event="Telechargement CV" data-umami-event-depuis="contact">{% include icone.html nom="telechargement" %}{{ site.data.ui.cta_cv }}</a>
+    </p>
+  </div>
+</section>
