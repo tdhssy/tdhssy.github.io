@@ -1,0 +1,24 @@
+saut_contenu: Aller au contenu
+nav_projets: Projets
+nav_competences: Compétences
+nav_contact: Contact
+cta_cv: Télécharger le CV
+cta_github: GitHub
+cta_linkedin: LinkedIn
+cta_email: Me contacter
+titre_apropos: À propos
+titre_projets: Projets
+titre_competences: Compétences
+titre_contact: Contact
+projet_retour: Retour aux projets
+projet_depot: Voir le dépôt
+projet_en_cours: en cours
+projet_depuis: depuis
+projet_date_invalide: "date invalide : "
+projet_date_absente: (absente)
+filtre_tout: Tout afficher
+filtre_resultat_pluriel: projets utilisent
+filtre_resultat_singulier: projet utilise
+pied_audience: Audience mesurée sans cookie ni donnée personnelle.
+pied_mention: Site statique construit avec Jekyll et publié par GitHub Pages.
+loupe_fermer: Fermer l'image agrandie
