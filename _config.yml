@@ -1,0 +1,52 @@
+title: Théo Dhaussy
+tagline: Administrateur Systèmes & Réseaux
+description: >-
+  Portfolio de Théo Dhaussy, administrateur systèmes et réseaux Linux et Windows.
+  Lab Active Directory hybride, homelab conteneurisé et supervision Grafana.
+url: https://tdhssy.github.io
+lang: fr
+
+auteur:
+  nom: Théo Dhaussy
+  email: t.dhssy@gmail.com
+  ville: Lorient (56)
+  mobilite: Mobilité Bretagne (Rennes / Nantes)
+  github: https://github.com/tdhssy
+  linkedin: https://www.linkedin.com/in/theo-dhaussy
+  cv: /assets/cv/CV_Theo_Dhaussy.pdf
+
+audience:
+  script: https://cloud.umami.is/script.js
+  id: "5dd3de9b-b7cc-4450-98b5-1719ef54dacf"
+
+verification:
+  google: "WitvC7VtPxrtKwI7mrSy5WmYO9k3-9H9kU34gP1LCOk"
+
+plugins:
+  - jekyll-sitemap
+
+defaults:
+  - scope:
+      path: "projets"
+    values:
+      layout: projet
+      type: projet
+
+exclude:
+  - vendor/
+  - .bundle/
+  - node_modules/
+  - .jekyll-cache/
+  - cv/
+  - tests/
+  - docs/
+  - scripts/
+  - .github/
+  - README.md
+  - CLAUDE.md
+  - servir.bat
+  - verifier.bat
+  - Gemfile
+  - Gemfile.lock
+  - .jekyll-bundle/
+  - .superpowers/

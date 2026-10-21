@@ -1,0 +1,116 @@
+{%- assign mois = "janv.,févr.,mars,avr.,mai,juin,juil.,août,sept.,oct.,nov.,déc." | split: "," -%}
+{%- assign chiffres = "0123456789" -%}
+
+{%- assign d_brute = include.debut | default: "" -%}
+{%- assign d_parties = d_brute | split: "-" -%}
+{%- assign d_valide = false -%}
+
+{%- if d_parties.size == 2 -%}
+  {%- assign d_annee = d_parties[0] -%}
+  {%- assign d_mois = d_parties[1] -%}
+  {%- assign d_annee_car = d_annee | split: "" -%}
+  {%- assign d_mois_car = d_mois | split: "" -%}
+
+  
+  {%- assign d_annee_forme_ok = false -%}
+  {%- if d_annee_car.size == 4 -%}
+    {%- assign d_annee_forme_ok = true -%}
+    {%- for c in d_annee_car -%}
+      {%- unless chiffres contains c -%}
+        {%- assign d_annee_forme_ok = false -%}
+      {%- endunless -%}
+    {%- endfor -%}
+  {%- endif -%}
+
+  
+  {%- assign d_mois_forme_ok = false -%}
+  {%- if d_mois_car.size == 2 -%}
+    {%- assign d_mois_forme_ok = true -%}
+    {%- for c in d_mois_car -%}
+      {%- unless chiffres contains c -%}
+        {%- assign d_mois_forme_ok = false -%}
+      {%- endunless -%}
+    {%- endfor -%}
+  {%- endif -%}
+
+  {%- if d_annee_forme_ok and d_mois_forme_ok -%}
+    {%- assign d_annee_num = d_annee | plus: 0 -%}
+    {%- assign d_mois_num = d_mois | plus: 0 -%}
+    {%- if d_mois_num >= 1 and d_mois_num <= 12 and d_annee_num >= 1990 and d_annee_num <= 2100 -%}
+      {%- assign d_valide = true -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endif -%}
+
+{%- if d_valide -%}
+  {%- assign d_mois_num = d_parties[1] | plus: 0 -%}
+  {%- assign d_index = d_mois_num | minus: 1 -%}
+  {%- assign d_txt = mois[d_index] | append: " " | append: d_parties[0] -%}
+{%- else -%}
+  {%- assign d_affiche = include.debut | default: site.data.ui.projet_date_absente -%}
+  {%- assign d_txt = site.data.ui.projet_date_invalide | append: d_affiche -%}
+{%- endif -%}
+
+{%- assign f_presente = false -%}
+{%- if include.fin and include.fin != "" -%}
+  {%- assign f_presente = true -%}
+{%- endif -%}
+{%- if f_presente -%}
+  {%- assign f_parties = include.fin | split: "-" -%}
+  {%- assign f_valide = false -%}
+
+  {%- if f_parties.size == 2 -%}
+    {%- assign f_annee = f_parties[0] -%}
+    {%- assign f_mois = f_parties[1] -%}
+    {%- assign f_annee_car = f_annee | split: "" -%}
+    {%- assign f_mois_car = f_mois | split: "" -%}
+
+    {%- assign f_annee_forme_ok = false -%}
+    {%- if f_annee_car.size == 4 -%}
+      {%- assign f_annee_forme_ok = true -%}
+      {%- for c in f_annee_car -%}
+        {%- unless chiffres contains c -%}
+          {%- assign f_annee_forme_ok = false -%}
+        {%- endunless -%}
+      {%- endfor -%}
+    {%- endif -%}
+
+    {%- assign f_mois_forme_ok = false -%}
+    {%- if f_mois_car.size == 2 -%}
+      {%- assign f_mois_forme_ok = true -%}
+      {%- for c in f_mois_car -%}
+        {%- unless chiffres contains c -%}
+          {%- assign f_mois_forme_ok = false -%}
+        {%- endunless -%}
+      {%- endfor -%}
+    {%- endif -%}
+
+    {%- if f_annee_forme_ok and f_mois_forme_ok -%}
+      {%- assign f_annee_num = f_annee | plus: 0 -%}
+      {%- assign f_mois_num = f_mois | plus: 0 -%}
+      {%- if f_mois_num >= 1 and f_mois_num <= 12 and f_annee_num >= 1990 and f_annee_num <= 2100 -%}
+        {%- assign f_valide = true -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- endif -%}
+
+  {%- if f_valide -%}
+    {%- assign f_mois_num = f_parties[1] | plus: 0 -%}
+    {%- assign f_index = f_mois_num | minus: 1 -%}
+    {%- assign f_txt = mois[f_index] | append: " " | append: f_parties[0] -%}
+  {%- else -%}
+    {%- assign f_txt = site.data.ui.projet_date_invalide | append: include.fin -%}
+  {%- endif -%}
+{%- endif -%}
+
+{%- if d_valide == false -%}
+  {{ d_txt }}
+{%- elsif f_presente == false -%}
+  {{ site.data.ui.projet_depuis }} {{ d_txt }} <span class="pastille">{{ site.data.ui.projet_en_cours }}</span>
+{%- elsif f_valide == false -%}
+  {{ f_txt }}
+{%- elsif include.debut == include.fin -%}
+  {{ d_txt }}
+{%- else -%}
+  {{ d_txt }} – {{ f_txt }}
+{%- endif -%}

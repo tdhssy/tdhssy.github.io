@@ -1,0 +1,20 @@
+{%- assign stack_min = "" -%}
+{%- for t in include.projet.stack -%}
+  {%- assign stack_min = stack_min | append: "|" | append: t -%}
+{%- endfor -%}
+{%- assign stack_min = stack_min | append: "|" | downcase -%}
+
+<article class="carte" data-stack="{{ stack_min }}">
+  <h3 class="carte-titre">
+    <a href="{{ include.projet.url | relative_url }}"
+       data-umami-event="Ouverture fiche projet"
+       data-umami-event-projet="{{ include.projet.titre }}">{{ include.projet.titre }}</a>
+  </h3>
+  <p class="carte-periode">{% include periode.html debut=include.projet.debut fin=include.projet.fin %}</p>
+  <p class="carte-resume">{{ include.projet.resume }}</p>
+  <ul class="tags">
+    {%- for t in include.projet.stack -%}
+      <li class="tag">{{ t }}</li>
+    {%- endfor -%}
+  </ul>
+</article>

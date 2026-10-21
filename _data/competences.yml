@@ -1,0 +1,19 @@
+- domaine: Systèmes & Infrastructure
+  metier: true
+  tags: [Debian, Ubuntu, Windows Server 2022, Docker, Portainer, Nginx, IIS, Certbot, VMware]
+
+- domaine: Active Directory & environnements hybrides
+  metier: true
+  tags: [AD DS, GPO, DNS, WSUS, Kerberos, realmd / sssd, CIFS]
+
+- domaine: Supervision & observabilité
+  metier: true
+  tags: [Grafana, Prometheus, Loki, Promtail, OpenTelemetry, Alloy, Tempo]
+
+- domaine: Réseaux & sécurité
+  metier: true
+  tags: [TCP/IP, NAT, OpenVPN, Wireshark, Durcissement pare-feu]
+
+- domaine: Scripting & automatisation
+  metier: false
+  tags: [Bash, Python, PowerShell, Ansible, Git]
